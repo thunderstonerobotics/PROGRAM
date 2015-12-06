@@ -22,6 +22,7 @@ public class BalanceBot  extends OpMode {
     DcMotor leftDrive;
     DcMotor rightDrive;
     DcMotor balance;
+    DcMotor slide;
 
     @Override
     public void init()
@@ -29,7 +30,9 @@ public class BalanceBot  extends OpMode {
         leftDrive = hardwareMap.dcMotor.get("left_drive");
         rightDrive = hardwareMap.dcMotor.get("right_drive");
         balance = hardwareMap.dcMotor.get("balance");
-        rightDrive.setDirection(DcMotor.Direction.REVERSE);
+        slide = hardwareMap.dcMotor.get("slide");
+        //rightDrive.setDirection(DcMotor.Direction.REVERSE);
+        leftDrive.setDirection(DcMotor.Direction.REVERSE);
         TeleopTank = new TeleopTank(hardwareMap.dcMotor.get("left_drive"),hardwareMap.dcMotor.get("right_drive"));
         Controller2 = new Controller2();
     }
@@ -41,6 +44,8 @@ public class BalanceBot  extends OpMode {
         TeleopTank.Tank(gamepad1.left_stick_y,gamepad1.right_stick_y);
 
         Controller2.assignMotor(balance, gamepad2.right_stick_y / 3);
+
+        Controller2.assignMotor(slide, gamepad2.left_stick_y /3);
 
 
     }
