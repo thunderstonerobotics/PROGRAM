@@ -44,6 +44,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
 import com.qualcomm.robotcore.hardware.DigitalChannelController;
+import com.qualcomm.robotcore.hardware.Servo;
 
 
 public class BasicAuto extends LinearOpMode
@@ -54,6 +55,7 @@ public class BasicAuto extends LinearOpMode
     DcMotor rightDrive;
     DcMotor balance;
     DcMotor slide;
+
 
     @Override
 
@@ -69,20 +71,12 @@ public class BasicAuto extends LinearOpMode
 
         waitForStart();
 
-        AutoFunctions.encoderTurn(rightDrive, leftDrive, -18300, 9800, -1, 1);
+        AutoFunctions.encoderTurn(rightDrive, leftDrive, -18500, 1000, -1, 1, rightDrive, -18300);
 
-        while(rightDrive.getCurrentPosition()>-18300)
-        {sleep(1000);}
-
-        leftDrive.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         rightDrive.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+        leftDrive.setMode(DcMotorController.RunMode.RESET_ENCODERS);
 
-        rightDrive.setTargetPosition(-15000);
-        leftDrive.setTargetPosition(15000);
-        rightDrive.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
-        leftDrive.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
-        rightDrive.setPower(-1);
-        rightDrive.setPower(1);
+        AutoFunctions.encoderTurn(rightDrive, leftDrive, -20000, 20000, -1, 1, rightDrive, -20000);
     }
 }
 

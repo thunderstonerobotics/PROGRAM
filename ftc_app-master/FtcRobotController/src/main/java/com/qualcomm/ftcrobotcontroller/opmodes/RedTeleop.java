@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
 /**
  * Created by Team Thunderstone on 9/30/2015.
  */
-public class BalanceBot  extends OpMode {
+public class RedTeleop  extends OpMode {
 
     //Calls the two subclasses containing the separate functions used to control all the functions of the robot
     TeleopTank TeleopTank;
@@ -72,18 +72,18 @@ public class BalanceBot  extends OpMode {
         //Allows for greater individual control of linear slides
         //Each slide's power is set to either .5, -.5, or 0 depending on the button pressed
         //This allows our robot to fully hang by stressing the top linear slide further than the bottom linear slide
-            //gamepad2.right_trigger>.5 is used to change the double variable into a boolean on/off - the .5
-            //can be changed to alter the sensitivity of the bumper
+        //gamepad2.right_trigger>.5 is used to change the double variable into a boolean on/off - the .5
+        //can be changed to alter the sensitivity of the bumper
         Controller2.slideIndividual(slideTop,gamepad2.right_bumper,gamepad2.right_trigger>.5, .5);
         Controller2.slideIndividual(slideBot,gamepad2.left_bumper,gamepad2.left_trigger>.5, -.5);
 
         //Assigns buttons to the continuous servos to allow them to wind the string up during the hang
         //They are in two separate functions to allow both servos to be set to the correct stop position
         //Even though they are assigned to the same two buttons (a and y)
-        Controller2.assignServo(blueClimb,gamepad2.y,blueOpen);
-        Controller2.assignServo(blueClimb,gamepad2.a,blueClosed);
-        //Controller2.assignServo(redClimb,gamepad2.y,redOpen);
-        //Controller2.assignServo(redClimb,gamepad2.a,redClosed);
+        //Controller2.assignServo(blueClimb,gamepad2.y,blueOpen);
+        //Controller2.assignServo(blueClimb,gamepad2.a,blueClosed);
+        Controller2.assignServo(redClimb,gamepad2.y,redOpen);
+        Controller2.assignServo(redClimb,gamepad2.a,redClosed);
     }
 }
 
