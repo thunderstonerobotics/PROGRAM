@@ -39,7 +39,7 @@ public class IMUtest extends OpMode {
 
                     , (byte)(AdafruitIMU.BNO055_ADDRESS_A * 2)//By convention the FTC SDK always does 8-bit I2C bus
                     //addressing
-                    , (byte)AdafruitIMU.OPERATION_MODE_IMU);
+                    , (byte)AdafruitIMU.OPERATION_MODE_ACCGYRO);
         } catch (RobotCoreException e){
             Log.i("FtcRobotController", "Exception: " + e.getMessage());
         }

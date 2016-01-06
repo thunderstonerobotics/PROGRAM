@@ -250,9 +250,9 @@ public class AdafruitIMU implements HardwareDevice, I2cController.I2cPortReadyCa
     private double[] rollOffset = new double[2], pitchOffset = new double[2], yawOffset = new double[2];
     /* For IMU mode, the register addresses 0X1A thru 0X2D (20 bytes) should be read consecutively */
   /* Enable I2C Read Mode and address the bytes in the ReadCache using the following parameters: */
-    private int numberOfRegisters = 20;
-    private int registerStartAddress = BNO055_EULER_H_LSB_ADDR;
-    private int readCacheOffset = BNO055_EULER_H_LSB_ADDR - I2cController.I2C_BUFFER_START_ADDRESS;
+    private int numberOfRegisters = 12;
+    private int registerStartAddress = BNO055_ACCEL_DATA_X_LSB_ADDR;
+    private int readCacheOffset = BNO055_ACCEL_DATA_X_LSB_ADDR - I2cController.I2C_BUFFER_START_ADDRESS;
     /* The folowing variables instrument the performance of I2C reading and writing */
     public long totalI2Creads;//This variable counts the number of "read"s processed by the callback
     public double maxReadInterval;
@@ -492,7 +492,7 @@ public class AdafruitIMU implements HardwareDevice, I2cController.I2cPortReadyCa
    * 2. Enable I2C read mode and start the self-perpetuating sequence of register readings
    *
   */
-        i2cIMU.registerForI2cPortReadyCallback(this);
+       i2cIMU.registerForI2cPortReadyCallback(this);
         offsetsInitialized = false;
         i2cIMU.enableI2cReadMode(baseI2Caddress, registerStartAddress, numberOfRegisters);
         maxReadInterval = 0.0;
@@ -509,7 +509,7 @@ public class AdafruitIMU implements HardwareDevice, I2cController.I2cPortReadyCa
     * Tait-Bryan equations listed in:
     * https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
     */
-    public void getIMUGyroAngles(double[] roll, double[] pitch, double[] yaw) {
+    /*public void getIMUGyroAngles(double[] roll, double[] pitch, double[] yaw) {
         short tempR = 0, tempP = 0, tempY = 0;
         double tempRoll = 0.0, tempPitch = 0.0, tempYaw = 0.0;
         double tempQuatRoll = 0.0, tempQuatPitch = 0.0, tempQuatYaw = 0.0;
@@ -544,22 +544,22 @@ public class AdafruitIMU implements HardwareDevice, I2cController.I2cPortReadyCa
    * Ref: Table 3-7, p.26, Table 3-13, p.30, and Section 3.6.5.4, p.35
    * This is a fixed-point number in degrees * 16, i.e., 12 integer bits and 4 fractional bits.
    */
-                tempR = (short) (((i2cReadCache[BNO055_EULER_P_MSB_ADDR - readCacheOffset] & 0XFF) << 8)
-                        | (i2cReadCache[BNO055_EULER_P_LSB_ADDR - readCacheOffset] & 0XFF));
+   //             tempR = (short) (((i2cReadCache[BNO055_EULER_P_MSB_ADDR - readCacheOffset] & 0XFF) << 8)
+    //                    | (i2cReadCache[BNO055_EULER_P_LSB_ADDR - readCacheOffset] & 0XFF));
    /*
    * The IMU reports a 16-bit angle (that is really "pitch", not "roll") between -90 and +90 degrees.
    * Ref: Table 3-7, p.26, Table 3-13, p.30, and Section 3.6.5.4, p.35
    * This is a fixed-point number in degrees * 16, i.e., 12 integer bits and 4 fractional bits.
    */
-                tempP = (short) (((i2cReadCache[BNO055_EULER_R_MSB_ADDR - readCacheOffset] & 0XFF) << 8)
-                        | (i2cReadCache[BNO055_EULER_R_LSB_ADDR - readCacheOffset] & 0XFF));
+   //             tempP = (short) (((i2cReadCache[BNO055_EULER_R_MSB_ADDR - readCacheOffset] & 0XFF) << 8)
+  //                      | (i2cReadCache[BNO055_EULER_R_LSB_ADDR - readCacheOffset] & 0XFF));
    /*
    * The IMU reports a 16-bit heading angle between 0 and 360 degrees, increasing with clockwise
    * turns. Ref: Table 3-7, p.26, Table 3-13, p.30, and Section 3.6.5.4, p.35
    * This is a fixed-point number in degrees * 16, i.e., 12 integer bits and 4 fractional bits.
    */
-                tempY = (short) (((i2cReadCache[BNO055_EULER_H_MSB_ADDR - readCacheOffset] & 0XFF) << 8)
-                        | (i2cReadCache[BNO055_EULER_H_LSB_ADDR - readCacheOffset] & 0XFF));
+    //            tempY = (short) (((i2cReadCache[BNO055_EULER_H_MSB_ADDR - readCacheOffset] & 0XFF) << 8)
+    /*                    | (i2cReadCache[BNO055_EULER_H_LSB_ADDR - readCacheOffset] & 0XFF));
             } finally {
                 i2cReadCacheLock.unlock();
             }
@@ -596,7 +596,7 @@ public class AdafruitIMU implements HardwareDevice, I2cController.I2cPortReadyCa
     * MUST BE MOUNTED ON A FLAT SURFACE (PITCH = 0 AND ROLL = 0) AND FACING "FORWARD" (YAW(HEADING)
     * = 0.
     */
-            if (!offsetsInitialized) {
+     /*       if (!offsetsInitialized) {
                 rollOffset[0] = tempRoll;
                 rollOffset[1] = tempQuatRoll;
                 pitchOffset[0] = tempPitch;
@@ -627,7 +627,7 @@ public class AdafruitIMU implements HardwareDevice, I2cController.I2cPortReadyCa
             yaw[0] = 0.0;
             yaw[1] = 0.0;
         }
-    }
+    } */
     public void getAccel(short x, short y, short z) {
 
         if (totalI2Creads > 2) { //Wait until the incoming data becomes valid

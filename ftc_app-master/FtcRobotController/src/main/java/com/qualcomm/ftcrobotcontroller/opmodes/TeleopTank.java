@@ -42,6 +42,5 @@ public class TeleopTank  {
             case 2: Tank(leftY,rightY,divider);
         }
     }
-
 }
 
