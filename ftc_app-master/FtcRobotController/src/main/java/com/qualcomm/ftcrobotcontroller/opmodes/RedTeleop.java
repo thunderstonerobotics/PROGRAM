@@ -30,11 +30,13 @@ public class RedTeleop  extends OpMode {
 
     Servo blueClimb;
     Servo redClimb;
+    Servo bumper;
     double redOpen = .88;
     double redClosed = .3;
     double blueOpen = .3;
     double blueClosed = .88 ;
-
+    double bumperOpen = .1;
+    double bumperClosed = .9;
 
     @Override
     public void init()
@@ -46,6 +48,7 @@ public class RedTeleop  extends OpMode {
         slideBot = hardwareMap.dcMotor.get("slideBot");
         blueClimb = hardwareMap.servo.get("blueClimb");
         redClimb = hardwareMap.servo.get("redClimb");
+        bumper = hardwareMap.servo.get("bumper");
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
         //leftDrive.setDirection(DcMotor.Direction.REVERSE);
         TeleopTank = new TeleopTank(hardwareMap.dcMotor.get("left_drive"),hardwareMap.dcMotor.get("right_drive"));
@@ -84,6 +87,11 @@ public class RedTeleop  extends OpMode {
         //Controller2.assignServo(blueClimb,gamepad2.a,blueClosed);
         Controller2.assignServo(redClimb,gamepad2.y,redOpen);
         Controller2.assignServo(redClimb,gamepad2.a,redClosed);
+
+        //Assigns buttons to the ball blocker so we can move it upward to stop it hitting the ramp
+        //Its uses the same assign servo code that the climer bumpers use found in the class Controller2
+        Controller2.assignServo(bumper,gamepad2.x, bumperOpen);
+        Controller2.assignServo(bumper,gamepad2.b,bumperClosed);
     }
 }
 
