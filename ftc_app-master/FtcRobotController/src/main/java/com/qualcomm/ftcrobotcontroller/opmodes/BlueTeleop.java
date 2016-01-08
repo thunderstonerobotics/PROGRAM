@@ -39,8 +39,8 @@ public class BlueTeleop  extends OpMode {
     double blueClosed = .88 ;
     double bumperOpen = .1;
     double bumperClosed = .9;
-    double allClearHit = .9;
-    double allClearOpen = .1;
+    double allClearHit = .05;
+    double allClearOpen = .95;
 
     @Override
     public void init()
@@ -52,6 +52,7 @@ public class BlueTeleop  extends OpMode {
         slideBot = hardwareMap.dcMotor.get("slideBot");
         blueClimb = hardwareMap.servo.get("blueClimb");
         redClimb = hardwareMap.servo.get("redClimb");
+        allClear = hardwareMap.servo.get("allClear");
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
         //leftDrive.setDirection(DcMotor.Direction.REVERSE);
         TeleopTank = new TeleopTank(hardwareMap.dcMotor.get("left_drive"),hardwareMap.dcMotor.get("right_drive"));
@@ -99,8 +100,8 @@ public class BlueTeleop  extends OpMode {
 
         //Assigns the butons on Controller one to move the all clear arm once the robot has hung
         //Once again it uses the assignServo function found in the class Controller2 to help streamline the main code
-        Controller2.assignServo(allClear, gamepad2.y, allClearHit);
-        Controller2.assignServo(allClear, gamepad2.a, allClearOpen);
+        Controller2.assignServo(allClear, gamepad1.y, allClearHit);
+        Controller2.assignServo(allClear, gamepad1.a, allClearOpen);
     }
 }
 

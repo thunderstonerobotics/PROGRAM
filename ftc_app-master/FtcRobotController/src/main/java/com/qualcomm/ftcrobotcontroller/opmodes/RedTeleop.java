@@ -39,8 +39,8 @@ public class RedTeleop  extends OpMode {
     double blueClosed = .88 ;
     double bumperOpen = .1;
     double bumperClosed = .9;
-    double allClearHit = .9;
-    double allClearOpen = .1;
+    double allClearHit = .05;
+    double allClearOpen = .95;
 
 
     @Override
@@ -54,6 +54,7 @@ public class RedTeleop  extends OpMode {
         blueClimb = hardwareMap.servo.get("blueClimb");
         redClimb = hardwareMap.servo.get("redClimb");
         bumper = hardwareMap.servo.get("bumper");
+        allClear = hardwareMap.servo.get("allClear");
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
         //leftDrive.setDirection(DcMotor.Direction.REVERSE);
         TeleopTank = new TeleopTank(hardwareMap.dcMotor.get("left_drive"),hardwareMap.dcMotor.get("right_drive"));
@@ -99,11 +100,11 @@ public class RedTeleop  extends OpMode {
         //Its uses the same assign servo code that the climer bumpers use found in the class Controller2
         Controller2.assignServo(bumper,gamepad2.x, bumperOpen);
         Controller2.assignServo(bumper,gamepad2.b,bumperClosed);
-        
+
         //Assigns the butons on Controller one to move the all clear arm once the robot has hung
         //Once again it uses the assignServo function found in the class Controller2 to help streamline the main code
-        Controller2.assignServo(allClear, gamepad2.y, allClearHit);
-        Controller2.assignServo(allClear, gamepad2.a, allClearOpen);
+        Controller2.assignServo(allClear, gamepad1.y, allClearHit);
+        Controller2.assignServo(allClear, gamepad1.a, allClearOpen);
     }
 }
 
