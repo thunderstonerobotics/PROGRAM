@@ -52,6 +52,7 @@ public class BlueTeleop  extends OpMode {
         slideBot = hardwareMap.dcMotor.get("slideBot");
         blueClimb = hardwareMap.servo.get("blueClimb");
         redClimb = hardwareMap.servo.get("redClimb");
+        bumper = hardwareMap.servo.get("bumper");
         allClear = hardwareMap.servo.get("allClear");
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
         //leftDrive.setDirection(DcMotor.Direction.REVERSE);
