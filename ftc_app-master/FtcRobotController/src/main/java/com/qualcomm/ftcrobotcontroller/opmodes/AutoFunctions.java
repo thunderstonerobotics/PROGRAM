@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotorController;
 /**
  * Created by TechEd on 10/9/2015.
  */
+
+//THis class is a subclass
 public class AutoFunctions
 {
     public void encoderTurn (DcMotor driveR, DcMotor driveL, Integer pos1, Integer pos2, double power1, double power2, DcMotor end, Integer endp)

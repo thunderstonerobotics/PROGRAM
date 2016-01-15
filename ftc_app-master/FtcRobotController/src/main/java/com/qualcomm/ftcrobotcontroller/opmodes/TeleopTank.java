@@ -6,6 +6,11 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
+//This is one of the classes called in the main tele-op class
+//It is used to run the tank drive used by controller 1 in the main code
+//It additionally contains the fragments of a second version of the tank drive
+//that allows for a button to be pressed and the drive power to be decreased by
+//a given number "divider"
 
 public class TeleopTank  {
 
