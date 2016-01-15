@@ -47,7 +47,7 @@ import com.qualcomm.robotcore.hardware.DigitalChannelController;
 import com.qualcomm.robotcore.hardware.Servo;
 
 
-public class BasicAuto extends LinearOpMode
+public class RampAuto extends LinearOpMode
 {
     AutoFunctions AutoFunctions;
 
@@ -93,16 +93,27 @@ public class BasicAuto extends LinearOpMode
 
         leftDrive.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         rightDrive.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+        balance.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         leftDrive.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         rightDrive.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+        balance.setMode(DcMotorController.RunMode.RESET_ENCODERS);
 
         waitForStart();
 
-        while (balance.getCurrentPosition()<3500)
+
+        AutoFunctions.encoderTurn(rightDrive, leftDrive, -7250, -15500, .5, 1, leftDrive, -15500);
+
+        bumper.setPosition(bumperOpen);
+
+        AutoFunctions.singleMotor(balance, 3500, .5);
+
+        while (leftDrive.getCurrentPosition()<0)
         {
-            balance.setPower(.5);
+            leftDrive.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+            rightDrive.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         }
-        balance.setPower(0);
+
+        AutoFunctions. encoderTurn(rightDrive, leftDrive, -10000, -10000, 1, 1, leftDrive, -10000);
     }
 }
 

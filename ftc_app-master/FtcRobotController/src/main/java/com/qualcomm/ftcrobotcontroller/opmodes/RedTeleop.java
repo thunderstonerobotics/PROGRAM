@@ -33,6 +33,12 @@ public class RedTeleop  extends OpMode {
     Servo bumper;
     Servo allClear;
 
+    //These are preset servo positions that are called later in the program
+    //They make it easier to change the number for recalibration as I have to
+    //Only change one number
+    //Additionally the red and blue closed/open position are saved in both codes
+    //Even through they aren't called in both to allow for further modifications
+    //That use the positions
     double redOpen = .88;
     double redClosed = .3;
     double blueOpen = .3;
