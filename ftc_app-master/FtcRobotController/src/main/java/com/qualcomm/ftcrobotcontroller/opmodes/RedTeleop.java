@@ -77,7 +77,7 @@ public class RedTeleop  extends OpMode {
     public void loop()
     {
         //Basic Tank Drive - each joystick on controller 1 controls the power of each side of wheels
-        TeleopTank.Tank(gamepad1.left_stick_y,gamepad1.right_stick_y);
+        TeleopTank.driveFlip(gamepad1.left_stick_y,gamepad1.right_stick_y, gamepad1.y, gamepad1.a);
 
         //Sets flipper arm to the value of the right joystick on controller 2
         Controller2.assignMotor(balance, -gamepad2.right_stick_y);

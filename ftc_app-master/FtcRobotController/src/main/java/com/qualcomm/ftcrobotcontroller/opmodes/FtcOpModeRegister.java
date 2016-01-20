@@ -59,6 +59,5 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register("Blue Team", RedTeleop.class);
     manager.register("Red Team", BlueTeleop.class);
     manager.register("Ramp Auto", RampAuto.class);
-    manager.register("Test Arm", BasicAuto.class);
   }
 }

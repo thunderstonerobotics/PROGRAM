@@ -34,7 +34,7 @@ public class TeleopTank  {
         leftMotor.setPower(leftY*divider);
         rightMotor.setPower(rightY*divider);
     }
-    public void driveShift (float leftY, float rightY, double divider, boolean Button1, boolean Button2)
+    public void driveFlip (float leftY, float rightY, boolean Button1, boolean Button2)
     {
         if (Button1)
         {caseVar = 1;}
@@ -44,7 +44,7 @@ public class TeleopTank  {
         switch (caseVar)
         {
             case 1: Tank(leftY,rightY);
-            case 2: Tank(leftY,rightY,divider);
+            case 2: Tank(-leftY,-rightY);
         }
     }
 }

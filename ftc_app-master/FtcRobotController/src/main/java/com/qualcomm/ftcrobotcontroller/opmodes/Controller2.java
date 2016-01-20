@@ -86,5 +86,19 @@ public class Controller2
             slide.setPower(0);
         }
     }
+
+    public void armShift (DcMotor balance, float joy, boolean fast, boolean slow, int caseVar)
+    {
+        if (fast)
+        {caseVar = 1;}
+        if (slow)
+        {caseVar = 2;}
+
+        switch (caseVar)
+        {
+            case 1: assignMotor(balance,joy);
+            case 2: assignMotor(balance,joy/4);
+        }
+    }
 }
 
