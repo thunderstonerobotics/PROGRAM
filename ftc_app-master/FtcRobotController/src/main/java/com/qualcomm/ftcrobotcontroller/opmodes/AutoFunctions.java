@@ -57,11 +57,20 @@ public class AutoFunctions
 
     public void encoderStraight (DcMotor driveR, DcMotor driveL, Integer pos, double power)
     {
-        driveR.setTargetPosition(-pos);
-        driveL.setTargetPosition(pos);
-        driveR.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
-        driveL.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
-        driveR.setPower(-power);
-        driveL.setPower(power);
+        while(driveR.getCurrentPosition()>pos)
+        {
+            driveR.setTargetPosition(pos);
+            driveL.setTargetPosition(pos);
+            driveR.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
+            driveL.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
+            driveR.setPower(power);
+            driveL.setPower(power);
+        }
+        driveL.setPower(0);
+        driveR.setPower(0);
+
+
+        driveL.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+        driveR.setMode(DcMotorController.RunMode.RESET_ENCODERS);
     }
 }

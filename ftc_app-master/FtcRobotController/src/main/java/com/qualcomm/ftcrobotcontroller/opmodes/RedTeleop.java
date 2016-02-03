@@ -30,7 +30,6 @@ public class RedTeleop  extends OpMode {
 
     Servo blueClimb;
     Servo redClimb;
-    Servo bumper;
     Servo allClear;
 
     //These are preset servo positions that are called later in the program
@@ -43,8 +42,6 @@ public class RedTeleop  extends OpMode {
     double redClosed = .3;
     double blueOpen = .3;
     double blueClosed = .88 ;
-    double bumperOpen = .1;
-    double bumperClosed = .9;
     double allClearHit = .05;
     double allClearOpen = .95;
 
@@ -59,7 +56,6 @@ public class RedTeleop  extends OpMode {
         slideBot = hardwareMap.dcMotor.get("slideBot");
         blueClimb = hardwareMap.servo.get("blueClimb");
         redClimb = hardwareMap.servo.get("redClimb");
-        bumper = hardwareMap.servo.get("bumper");
         allClear = hardwareMap.servo.get("allClear");
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
         //leftDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -69,7 +65,6 @@ public class RedTeleop  extends OpMode {
         //sets initial servo positions
         blueClimb.setPosition(blueClosed);
         redClimb.setPosition(redClosed);
-        allClear.setPosition(allClearOpen);
 
     }
 
@@ -77,10 +72,10 @@ public class RedTeleop  extends OpMode {
     public void loop()
     {
         //Basic Tank Drive - each joystick on controller 1 controls the power of each side of wheels
-        TeleopTank.driveFlip(gamepad1.left_stick_y,gamepad1.right_stick_y, gamepad1.y, gamepad1.a);
+        TeleopTank.Tank(gamepad1.left_stick_y,gamepad1.right_stick_y);
 
         //Sets flipper arm to the value of the right joystick on controller 2
-        Controller2.assignMotor(balance, -gamepad2.right_stick_y);
+        Controller2.assignMotor(balance,-gamepad2.right_stick_y);
 
         //Sets both of the linear slides equal to the power of the joystick
         Controller2.assignMotor(slideBot,gamepad2.left_stick_y);
@@ -101,11 +96,6 @@ public class RedTeleop  extends OpMode {
         //Controller2.assignServo(blueClimb,gamepad2.a,blueClosed);
         Controller2.assignServo(redClimb,gamepad2.y,redOpen);
         Controller2.assignServo(redClimb,gamepad2.a,redClosed);
-
-        //Assigns buttons to the ball blocker so we can move it upward to stop it hitting the ramp
-        //Its uses the same assign servo code that the climer bumpers use found in the class Controller2
-        Controller2.assignServo(bumper,gamepad2.x, bumperOpen);
-        Controller2.assignServo(bumper,gamepad2.b,bumperClosed);
 
         //Assigns the butons on Controller one to move the all clear arm once the robot has hung
         //Once again it uses the assignServo function found in the class Controller2 to help streamline the main code
